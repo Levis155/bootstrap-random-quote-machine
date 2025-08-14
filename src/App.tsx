@@ -9,29 +9,16 @@ import generateRandomColor from "./utils/generateRandomColor";
 import "./App.css";
 
 function App() {
-  const [fetchError, setFetchError] = useState<string | null>(null);
   const [primaryColor, setPrimaryColor] = useState<string>("#000000");
 
   const { isFetching, isError, error, data, refetch } = useQuery({
     queryKey: ["get-random-quote"],
     queryFn: async () => {
-      setFetchError(null);
       const response = await axios.get("https://dummyjson.com/quotes/random");
       console.log(response.data);
       return response.data;
     },
   });
-
-  useEffect(() => {
-    if (isError) {
-      if (axios.isAxiosError(error)) {
-        const serverMessage = error.response?.data.message;
-        setFetchError(serverMessage);
-      } else {
-        setFetchError("Something went wrong.");
-      }
-    }
-  }, [error]);
 
   useEffect(() => {
     if (data) {
@@ -45,7 +32,13 @@ function App() {
       style={{ backgroundColor: primaryColor }}
     >
       {isFetching && <BeatLoader size={20} color="#ffffff" />}
-      {isError && <h2>{fetchError}</h2>}
+      {isError && !isFetching && (
+        <h2 style={{ color: "#fff" }}>
+          {axios.isAxiosError(error)
+            ? error.response?.data?.message || error.message
+            : "Something went wrong."}
+        </h2>
+      )}
       {!isFetching && !isError && data && (
         <>
           <div className="bg-white w-50 p-5">
