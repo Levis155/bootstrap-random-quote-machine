@@ -41,22 +41,23 @@ function App() {
       )}
       {!isFetching && !isError && data && (
         <>
-          <div className="bg-white w-50 p-2 p-sm-3">
+          <div className="bg-white w-50 p-2 p-sm-3" id="quote-box">
             <div>
-              <p className="text-center fs-3" style={{ color: primaryColor }}>
+              <p className="text-center fs-3" style={{ color: primaryColor }} id="text">
                 <FaQuoteLeft
                   style={{ color: primaryColor, marginRight: "1rem" }}
                 />
                 {data.quote}
               </p>
             </div>
-            <p className="text-end fs-5" style={{ color: primaryColor }}>
+            <p className="text-end fs-5" style={{ color: primaryColor }} id="author">
               - {data.author}
             </p>
             <div className="d-flex justify-content-between">
               <div className="d-flex gap-1">
                 <a
                   className="cta-btn fs-5"
+                  id="tweet-quote"
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                     `"${data.quote}" — ${data.author}`
                   )}`}
@@ -80,6 +81,7 @@ function App() {
                 <button
                   className="cta-btn fs-5"
                   style={{ backgroundColor: primaryColor }}
+                  id="new-quote"
                   onClick={() => {
                     refetch();
                   }}
