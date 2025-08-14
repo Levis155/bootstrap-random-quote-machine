@@ -1,4 +1,7 @@
-  * {
+:root {
+    --primary-font: "Raleway", sans-serif;
+  }
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,5 +14,4 @@
   body {
     font-size: 1.6rem;
     font-family: var(--primary-font);
-    background-color: var(--black-light);
   }
