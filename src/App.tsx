@@ -5,10 +5,12 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaTumblr } from "react-icons/fa";
 import { FaQuoteLeft } from "react-icons/fa";
 import { BeatLoader } from "react-spinners";
+import generateRandomColor from "./utils/generateRandomColor";
 import "./App.css";
 
 function App() {
   const [fetchError, setFetchError] = useState<string | null>(null);
+  const [primaryColor, setPrimaryColor] = useState<string>("#000000");
 
   const { isFetching, isError, error, data, refetch } = useQuery({
     queryKey: ["get-random-quote"],
@@ -31,32 +33,39 @@ function App() {
     }
   }, [error]);
 
+  useEffect(() => {
+  if (data) {
+    setPrimaryColor(generateRandomColor())
+  }
+}, [data]);
+
   return (
-    <div className="container-fluid bg-primary min-vh-100 d-flex flex-column justify-content-center align-items-center">
-      {isFetching && <BeatLoader size={20} color="#f5c417" />}
+    <div className="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center" style={{backgroundColor: primaryColor}}>
+      {isFetching && <BeatLoader size={20} color="#ffffff" />}
       {isError && <h2>{fetchError}</h2>}
       {!isFetching && !isError && data && (
         <>
           <div className="bg-white w-50 p-5">
-            <div>
-              <FaQuoteLeft />
-              <p className="text-center fs-1 d-flex align-items-center gap-3">
+            <div className="d-flex mr-1">
+              <FaQuoteLeft style={{color: primaryColor}} />
+              <p className="text-center fs-1 d-flex align-items-center gap-3" style={{color: primaryColor}}>
                 {data.quote}
               </p>
             </div>
-            <p className="text-end">- {data.author}</p>
+            <p className="text-end" style={{color: primaryColor}}>- {data.author}</p>
             <div className="d-flex justify-content-between">
               <div className="d-flex gap-1">
-                <a className="cta-btn" href="#" target="_blank">
+                <a className="cta-btn" href="#" target="_blank" style={{backgroundColor: primaryColor}}>
                   <FaXTwitter />
                 </a>
-                <a className="cta-btn" href="#" target="_blank">
+                <a className="cta-btn" href="#" target="_blank" style={{backgroundColor: primaryColor}}>
                   <FaTumblr />
                 </a>
               </div>
               <div>
                 <button
                   className="cta-btn"
+                  style={{backgroundColor: primaryColor}}
                   onClick={() => {
                     refetch();
                   }}
