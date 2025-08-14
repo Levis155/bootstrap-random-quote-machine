@@ -34,38 +34,60 @@ function App() {
   }, [error]);
 
   useEffect(() => {
-  if (data) {
-    setPrimaryColor(generateRandomColor())
-  }
-}, [data]);
+    if (data) {
+      setPrimaryColor(generateRandomColor());
+    }
+  }, [data]);
 
   return (
-    <div className="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center" style={{backgroundColor: primaryColor}}>
+    <div
+      className="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center"
+      style={{ backgroundColor: primaryColor }}
+    >
       {isFetching && <BeatLoader size={20} color="#ffffff" />}
       {isError && <h2>{fetchError}</h2>}
       {!isFetching && !isError && data && (
         <>
           <div className="bg-white w-50 p-5">
             <div className="d-flex mr-1">
-              <FaQuoteLeft style={{color: primaryColor}} />
-              <p className="text-center fs-1 d-flex align-items-center gap-3" style={{color: primaryColor}}>
+              <FaQuoteLeft style={{ color: primaryColor }} />
+              <p
+                className="text-center fs-1 d-flex align-items-center gap-3"
+                style={{ color: primaryColor }}
+              >
                 {data.quote}
               </p>
             </div>
-            <p className="text-end" style={{color: primaryColor}}>- {data.author}</p>
+            <p className="text-end" style={{ color: primaryColor }}>
+              - {data.author}
+            </p>
             <div className="d-flex justify-content-between">
               <div className="d-flex gap-1">
-                <a className="cta-btn" href="#" target="_blank" style={{backgroundColor: primaryColor}}>
+                <a
+                  className="cta-btn"
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                    `"${data.quote}" — ${data.author}`
+                  )}`}
+                  target="_blank"
+                  style={{ backgroundColor: primaryColor }}
+                >
                   <FaXTwitter />
                 </a>
-                <a className="cta-btn" href="#" target="_blank" style={{backgroundColor: primaryColor}}>
+                <a
+                  className="cta-btn"
+                  href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes&caption=${encodeURIComponent(
+                    data.author
+                  )}&content=${encodeURIComponent(data.quote)}`}
+                  target="_blank"
+                  style={{ backgroundColor: primaryColor }}
+                >
                   <FaTumblr />
                 </a>
               </div>
               <div>
                 <button
                   className="cta-btn"
-                  style={{backgroundColor: primaryColor}}
+                  style={{ backgroundColor: primaryColor }}
                   onClick={() => {
                     refetch();
                   }}
