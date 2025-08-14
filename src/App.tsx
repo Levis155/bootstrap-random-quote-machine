@@ -41,22 +41,22 @@ function App() {
       )}
       {!isFetching && !isError && data && (
         <>
-          <div className="bg-white w-50 p-5">
+          <div className="bg-white w-50 p-2 p-sm-3">
             <div>
-              <p className="text-center fs-1" style={{ color: primaryColor }}>
+              <p className="text-center fs-3" style={{ color: primaryColor }}>
                 <FaQuoteLeft
                   style={{ color: primaryColor, marginRight: "1rem" }}
                 />
                 {data.quote}
               </p>
             </div>
-            <p className="text-end" style={{ color: primaryColor }}>
+            <p className="text-end fs-5" style={{ color: primaryColor }}>
               - {data.author}
             </p>
             <div className="d-flex justify-content-between">
               <div className="d-flex gap-1">
                 <a
-                  className="cta-btn"
+                  className="cta-btn fs-5"
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                     `"${data.quote}" — ${data.author}`
                   )}`}
@@ -66,7 +66,7 @@ function App() {
                   <FaXTwitter />
                 </a>
                 <a
-                  className="cta-btn"
+                  className="cta-btn fs-5"
                   href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes&caption=${encodeURIComponent(
                     data.author
                   )}&content=${encodeURIComponent(data.quote)}`}
@@ -78,7 +78,7 @@ function App() {
               </div>
               <div>
                 <button
-                  className="cta-btn"
+                  className="cta-btn fs-5"
                   style={{ backgroundColor: primaryColor }}
                   onClick={() => {
                     refetch();
@@ -90,7 +90,7 @@ function App() {
             </div>
           </div>
 
-          <span className="mt-4 text-white">by Levis</span>
+          <span className="mt-4 text-white fs-5">by Levis</span>
         </>
       )}
     </div>
