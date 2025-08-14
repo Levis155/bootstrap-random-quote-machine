@@ -49,12 +49,11 @@ function App() {
       {!isFetching && !isError && data && (
         <>
           <div className="bg-white w-50 p-5">
-            <div className="d-flex mr-1">
-              <FaQuoteLeft style={{ color: primaryColor }} />
-              <p
-                className="text-center fs-1 d-flex align-items-center gap-3"
-                style={{ color: primaryColor }}
-              >
+            <div>
+              <p className="text-center fs-1" style={{ color: primaryColor }}>
+                <FaQuoteLeft
+                  style={{ color: primaryColor, marginRight: "1rem" }}
+                />
                 {data.quote}
               </p>
             </div>
